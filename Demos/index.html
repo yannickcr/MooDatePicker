@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta charset="utf-8" />
+	<title>MooDatePicker Demo</title>
+	<script type="text/javascript" src="Mootools.Core.js"></script>
+	<script type="text/javascript" src="Mootools.More.js"></script>
+	<script type="text/javascript" src="Locale.en-US.Date.js"></script>
+	<script type="text/javascript" src="../Source/MooDatePicker.js"></script>
+	<link rel="stylesheet" href="demo.css" media="screen" />
+	<link rel="stylesheet" href="moodatepicker.css" media="screen" />
+</head>
+<body>
+	<h1>MooDatePicker Demo</h1>
+	<div id="container">
+<!-- Example 1 -->
+		<div class="block">
+			<h2>Example</h2>
+			<p>Click on one input to display his date picker</p>
+			<div><label for="date">Empty input: </label><input id="date" name="date" type="text" data-moodatepicker /></div>
+			<div><label for="date2">Pre-filled input: </label><input id="date2" name="date2" type="text" data-moodatepicker value="12 May 2011" /></div>
+			<script>
+				var myMooDatePicker = new MooDatePicker(document.getElements('input[data-moodatepicker]'), {
+					onPick: function(date){
+						this.element.set('value', date.format('%e %B %Y'));
+					}
+				});
+			</script>
+		</div>
+	</div>
+</body>
+</html>
