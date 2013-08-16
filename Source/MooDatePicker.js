@@ -64,8 +64,10 @@ var MooDatePicker = new Class({
 	 */
 	makeCalendar: function(){
 		var dayHeader = '',
-			days = Array.clone(Locale.get('Date' + '.days'));
-		days.push(days.shift());
+			days = Array.clone(Locale.get('Date' + '.days')),
+			firstDayOfWeek = Locale.get('Date' + '.firstDayOfWeek');
+
+		while(firstDayOfWeek-- > 0) days.push(days.shift());
 
 		// Calendar header
 		var header = this.options.templates.header.substitute({
@@ -203,10 +205,10 @@ var MooDatePicker = new Class({
 	 */
 	updateCalendar: function(newDate){
 		this.date = newDate.clone();
-		var firstDay = newDate.set('date', 1).getDay(),
-			firstDay = firstDay == 0 ? 6 : firstDay - 1,                     // Get the first day of the month
-			dayCount = newDate.get('lastdayofmonth'),                       // Get the number of days in the month
-			cellCount = Math.ceil((dayCount + firstDay) / 7) * 7;            // Get the number of cells to write in the calendar
+		var firstDayOfWeek = Locale.get('Date' + '.firstDayOfWeek'),     // Get the first day of the week
+			firstDay = newDate.set('date', 1).getDay() - firstDayOfWeek, // Get the first day of the month
+			dayCount = newDate.get('lastdayofmonth'),                    // Get the number of days in the month
+			cellCount = Math.ceil((dayCount + firstDay) / 7) * 7;        // Get the number of cells to write in the calendar
 
 		newDate.set('date', - firstDay);
 
