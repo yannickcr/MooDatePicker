@@ -64,7 +64,7 @@ var MooDatePicker = new Class({
 	 */
 	makeCalendar: function(){
 		var dayHeader = '',
-			days = Locale.get('Date' + '.days');
+			days = Array.clone(Locale.get('Date' + '.days'));
 		days.push(days.shift());
 
 		// Calendar header
